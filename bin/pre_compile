@@ -33,7 +33,7 @@ install_oracle_libraries(){
   #mkdir -p $build_dir/oracle
   mkdir -p $BUILD_DIR/oracle
   #cd $build_dir/oracle
-  mkdir -p $BUILD_DIR/oracle
+  cd $BUILD_DIR/oracle
   local basic_download_url="http://files.cargosmart.org/python/instantclient-basic-linux.x64-11.2.0.4.0.tar.gz"
   local sdk_download_url="http://files.cargosmart.org/python/instantclient-sdk-linux.x64-11.2.0.4.0.tar.gz"
   #curl -k "$basic_download_url" --silent --fail --retry 5 --retry-max-time 15 -o instantclient-basic.zip
@@ -50,8 +50,14 @@ install_oracle_libraries(){
   mv instantclient_11_2 instantclient
   cd instantclient
   ln -s libclntsh.so.12.1 libclntsh.so
+  ln -s libocci.so.11.1 libocci.so
+  
+  export LD_RUN_PATH=$BUILD_DIR/oracle/instantclient
+  export ORACLE_HOME=$BUILD_DIR/oracle/instantclient
+  
+  echo $LD_RUN_PATH && echo $ORACLE_HOME
+   
 }
-
 
 APT_CACHE_DIR="$CACHE_DIR/apt/cache"
 APT_STATE_DIR="$CACHE_DIR/apt/state"
