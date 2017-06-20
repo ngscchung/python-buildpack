@@ -75,8 +75,8 @@ fi
 
 echo "=*=*=*=*=* Check pre_compile hook"
 # Experimental pre_compile hook.
-source $BIN_DIR/steps/hooks/pre_compile
-
+#source $BIN_DIR/steps/hooks/pre_compile
+source $BIN_DIR/pre_compile
 # Pipenv Python version support.
 $BIN_DIR/steps/pipenv-python-version.rb $BUILD_DIR
 
