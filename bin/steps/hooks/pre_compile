@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "check for bin/pre_compile"
-ls bin/pre_compile
+ls bin
 
 if [ -f bin/pre_compile ]; then
     echo "-----> Running pre-compile hook"
