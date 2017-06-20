@@ -28,6 +28,8 @@ function indent() {
 APT_CACHE_DIR="$CACHE_DIR/apt/cache"
 APT_STATE_DIR="$CACHE_DIR/apt/state"
 
+echo "*+*+*+*+*+*+*+*+*+* APT_CACHE_DIR = $APT_CACHE_DIR"
+
 mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 
@@ -38,4 +40,10 @@ apt-get $APT_OPTIONS update | indent
 
 topic "Fetching .debs for libaio1"
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall libaio1 | indent
+
+for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
+  topic "Installing $(basename $DEB)"
+  dpkg -x $DEB $BUILD_DIR/.apt/
+done
+
 
