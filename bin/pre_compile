@@ -56,10 +56,10 @@ install_oracle_libraries(){
   ln -s libocci.so.11.1 libocci.so
   
   # set env variable here no use? need to add .sh in .profile.d
-  export LD_RUN_PATH=$oracle_home/instantclient
-  export ORACLE_HOME=$oracle_home/instantclient
+  # export LD_RUN_PATH=$oracle_home/instantclient
+  # export ORACLE_HOME=$oracle_home/instantclient
   
-  echo $LD_RUN_PATH && echo $ORACLE_HOME
+  # echo $LD_RUN_PATH && echo $ORACLE_HOME
    
 }
 
