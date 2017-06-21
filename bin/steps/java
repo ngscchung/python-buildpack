@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+
+echo "=====> Prepare to download JDK"
+
+# fail fast
+set -e
+
+install_jdk(){
+  echo $HOME
+  echo $BUILD_DIR
+  
+  echo "_+_+_+_+_+_Downloading jdk"
+  
+  local java_home=$DEPS_DIR/$DEPS_IDX/java
+  mkdir -p $java_home
+  
+  cd $java_home
+  
+  local jdk_download_url="http://10.222.58.152:8080/jdk-8u131-linux-x64.tar.gz"
+  wget --no-proxy "$jdk_download_url"
+  echo "Downloaded [$jdk_download_url]"
+  echo "unzipping libraries"
+  
+  tar -xvzf jdk-8u131-linux-x64.tar.gz
+  
+  rm jdk-8u131-linux-x64.tar.gz
+
+}
+
+install_jdk

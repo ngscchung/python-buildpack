@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+
+echo "=====> Inside pre_compile!!!"
+
+# fail fast
+set -e
+
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+
+function error() {
+  echo " !     $*" >&2
+  exit 1
+}
+
+function topic() {
+  echo "-----> $*"
+}
+
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
+
+install_oracle_libraries(){
+  echo $HOME
+  echo $BUILD_DIR
+  #local build_dir=${1:-}
+  echo "Installing oracle libraries"
+  #mkdir -p $build_dir/oracle
+  local oracle_home=$DEPS_DIR/$DEPS_IDX/oracle
+  mkdir -p $oracle_home
+  #cd $build_dir/oracle
+  cd $oracle_home
+  local basic_download_url="http://files.cargosmart.org/python/instantclient-basic-linux.x64-11.2.0.4.0.tar.gz"
+  local sdk_download_url="http://files.cargosmart.org/python/instantclient-sdk-linux.x64-11.2.0.4.0.tar.gz"
+  #curl -k "$basic_download_url" --silent --fail --retry 5 --retry-max-time 15 -o instantclient-basic.zip
+  wget --no-proxy "$basic_download_url"
+  echo "Downloaded [$basic_download_url]"
+  #curl -k "$sdk_download_url" --silent --fail --retry 5 --retry-max-time 15 -o instantclient-sdk.zip
+  wget --no-proxy "$sdk_download_url"
+  echo "Downloaded [$sdk_download_url]"
+  echo "unzipping libraries"
+  #unzip instantclient-basic.zip
+  tar -xvzf instantclient-basic-linux.x64-11.2.0.4.0.tar.gz
+  #unzip instantclient-sdk.zip
+  tar -xvzf instantclient-sdk-linux.x64-11.2.0.4.0.tar.gz
+  rm instantclient-basic-linux.x64-11.2.0.4.0.tar.gz
+  rm instantclient-sdk-linux.x64-11.2.0.4.0.tar.gz
+  mv instantclient_11_2 instantclient
+  cd instantclient
+  ln -s libclntsh.so.11.1 libclntsh.so
+  ln -s libocci.so.11.1 libocci.so
+  
+  # set env variable here no use? need to add .sh in .profile.d
+  # export LD_RUN_PATH=$oracle_home/instantclient
+  # export ORACLE_HOME=$oracle_home/instantclient
+  
+  # echo $LD_RUN_PATH && echo $ORACLE_HOME
+   
+}
+
+install_jdk(){
+  echo $HOME
+  echo $BUILD_DIR
+  
+  echo "_+_+_+_+_+_Installing jdk"
+  
+  local java_home=$DEPS_DIR/$DEPS_IDX/java
+  mkdir -p $java_home
+  
+  cd $java_home
+  
+  local jdk_download_url="http://10.222.58.152:8080/jdk-8u131-linux-x64.tar.gz"
+  wget --no-proxy "$jdk_download_url"
+  echo "Downloaded [$jdk_download_url]"
+  echo "unzipping libraries"
+  
+  tar -xvzf jdk-8u131-linux-x64.tar.gz
+  
+  rm jdk-8u131-linux-x64.tar.gz
+  
+  # set env variable here no use? need to add .sh in .profile.d
+  # export LD_RUN_PATH=$oracle_home/instantclient
+  # export ORACLE_HOME=$oracle_home/instantclient
+  
+  # echo $LD_RUN_PATH && echo $ORACLE_HOME
+   
+}
+
+APT_CACHE_DIR="$CACHE_DIR/apt/cache"
+APT_STATE_DIR="$CACHE_DIR/apt/state"
+
+echo "*+*+*+*+*+*+*+*+*+* APT_CACHE_DIR = $APT_CACHE_DIR"
+
+mkdir -p "$APT_CACHE_DIR/archives/partial"
+mkdir -p "$APT_STATE_DIR/lists/partial"
+
+APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
+
+# topic "Updating apt caches"
+# apt-get $APT_OPTIONS update | indent
+
+# topic "Fetching .debs for openjdk-7-jdk"
+# apt-get $APT_OPTIONS -y --force-yes -d install --reinstall libaio1 | indent
+# apt-get $APT_OPTIONS -y --force-yes -d install --reinstall openjdk-7-jdk | indent
+
+# for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
+  # topic "Installing $(basename $DEB)"
+  # dpkg -x $DEB $BUILD_DIR/.apt/
+# done
+
+#install_oracle_libraries 
+install_jdk
