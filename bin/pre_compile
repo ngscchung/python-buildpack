@@ -77,11 +77,12 @@ topic "Updating apt caches"
 apt-get $APT_OPTIONS update | indent
 
 topic "Fetching .debs for libaio1"
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall libaio1 | indent
+# apt-get $APT_OPTIONS -y --force-yes -d install --reinstall libaio1 | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall openjdk-8-jdk | indent
 
 for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
   topic "Installing $(basename $DEB)"
   dpkg -x $DEB $BUILD_DIR/.apt/
 done
 
-install_oracle_libraries 
+#install_oracle_libraries 
