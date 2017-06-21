@@ -31,9 +31,10 @@ install_oracle_libraries(){
   #local build_dir=${1:-}
   echo "Installing oracle libraries"
   #mkdir -p $build_dir/oracle
-  mkdir -p $BUILD_DIR/oracle
+  local oracle_home=$DEPS_DIR/$DEPS_IDX/oracle
+  mkdir -p $oracle_home
   #cd $build_dir/oracle
-  cd $BUILD_DIR/oracle
+  cd $oracle_home
   local basic_download_url="http://files.cargosmart.org/python/instantclient-basic-linux.x64-11.2.0.4.0.tar.gz"
   local sdk_download_url="http://files.cargosmart.org/python/instantclient-sdk-linux.x64-11.2.0.4.0.tar.gz"
   #curl -k "$basic_download_url" --silent --fail --retry 5 --retry-max-time 15 -o instantclient-basic.zip
@@ -47,13 +48,16 @@ install_oracle_libraries(){
   tar -xvzf instantclient-basic-linux.x64-11.2.0.4.0.tar.gz
   #unzip instantclient-sdk.zip
   tar -xvzf instantclient-sdk-linux.x64-11.2.0.4.0.tar.gz
+  rm instantclient-basic-linux.x64-11.2.0.4.0.tar.gz
+  rm instantclient-sdk-linux.x64-11.2.0.4.0.tar.gz
   mv instantclient_11_2 instantclient
   cd instantclient
-  ln -s libclntsh.so.12.1 libclntsh.so
+  ln -s libclntsh.so.11.1 libclntsh.so
   ln -s libocci.so.11.1 libocci.so
   
-  export LD_RUN_PATH=$BUILD_DIR/oracle/instantclient
-  export ORACLE_HOME=$BUILD_DIR/oracle/instantclient
+  # set env variable here no use? need to add .sh in .profile.d
+  export LD_RUN_PATH=$oracle_home/instantclient
+  export ORACLE_HOME=$oracle_home/instantclient
   
   echo $LD_RUN_PATH && echo $ORACLE_HOME
    
