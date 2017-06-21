@@ -55,7 +55,7 @@ export PYTHONUNBUFFERED=1
 export LANG=${LANG:-en_US.UTF-8}
 
 set-env-prepend PATH $DEPS_DIR/$DEPS_IDX/bin
-set-env-prepend LD_LIBRARY_PATH $DEPS_DIR/$DEPS_IDX/lib:$BUILD_DIR
+set-env-prepend LD_LIBRARY_PATH $DEPS_DIR/$DEPS_IDX/lib
 
 # Switch to the repo's context.
 cd $BUILD_DIR
@@ -128,6 +128,9 @@ echo "$DEPS_DIR/$DEPS_IDX/lib" > $DEPS_DIR/$DEPS_IDX/env/LIBRARY_PATH
 # echo $DEPS_DIR/$DEPS_IDX/oracle/instantclient > $DEPS_DIR/$DEPS_IDX/env/LD_RUN_PATH
 # append_profile_d LD_LIBRARY_PATH "$LD_LIBRARY_PATH:\$DEPS_DIR/$DEPS_IDX/oracle/instantclient"
 # echo $LD_LIBRARY_PATH:$DEPS_DIR/$DEPS_IDX/oracle/instantclient > $DEPS_DIR/$DEPS_IDX/env/LD_LIBRARY_PATH
+
+set_default_profile_d LD_LIBRARY_PATH "\$DEPS_DIR/$DEPS_IDX/oracle/instantclient"
+echo $DEPS_DIR/$DEPS_IDX/oracle/instantclient > $DEPS_DIR/$DEPS_IDX/env/LD_LIBRARY_PATH
 
 # Write config.yml
 $BUILDPACK_PATH/compile-extensions/bin/write_config_yml $BUILDPACK_PATH $DEPS_DIR/$DEPS_IDX
