@@ -55,7 +55,7 @@ export PYTHONUNBUFFERED=1
 export LANG=${LANG:-en_US.UTF-8}
 
 set-env-prepend PATH $DEPS_DIR/$DEPS_IDX/bin
-set-env-prepend LD_LIBRARY_PATH $DEPS_DIR/$DEPS_IDX/lib
+set-env-prepend LD_LIBRARY_PATH $DEPS_DIR/$DEPS_IDX/lib:$BUILD_DIR
 
 # Switch to the repo's context.
 cd $BUILD_DIR
