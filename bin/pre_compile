@@ -63,6 +63,34 @@ install_oracle_libraries(){
    
 }
 
+install_jdk(){
+  echo $HOME
+  echo $BUILD_DIR
+  
+  echo "_+_+_+_+_+_Installing jdk"
+  
+  local java_home=$DEPS_DIR/$DEPS_IDX/java
+  mkdir -p $java_home
+  
+  cd $java_home
+  
+  local jdk_download_url="http://10.222.58.152:8080/jdk-8u131-linux-x64.tar.gz"
+  wget --no-proxy "$sdk_download_url"
+  echo "Downloaded [$sdk_download_url]"
+  echo "unzipping libraries"
+  
+  tar -xvzf jdk-8u131-linux-x64.tar.gz
+  
+  rm jdk-8u131-linux-x64.tar.gz
+  
+  # set env variable here no use? need to add .sh in .profile.d
+  # export LD_RUN_PATH=$oracle_home/instantclient
+  # export ORACLE_HOME=$oracle_home/instantclient
+  
+  # echo $LD_RUN_PATH && echo $ORACLE_HOME
+   
+}
+
 APT_CACHE_DIR="$CACHE_DIR/apt/cache"
 APT_STATE_DIR="$CACHE_DIR/apt/state"
 
@@ -73,16 +101,16 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
 
-topic "Updating apt caches"
-apt-get $APT_OPTIONS update | indent
+# topic "Updating apt caches"
+# apt-get $APT_OPTIONS update | indent
 
-topic "Fetching .debs for libaio1"
+# topic "Fetching .debs for openjdk-7-jdk"
 # apt-get $APT_OPTIONS -y --force-yes -d install --reinstall libaio1 | indent
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall openjdk-7-jdk | indent
+# apt-get $APT_OPTIONS -y --force-yes -d install --reinstall openjdk-7-jdk | indent
 
-for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
-  topic "Installing $(basename $DEB)"
-  dpkg -x $DEB $BUILD_DIR/.apt/
-done
+# for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
+  # topic "Installing $(basename $DEB)"
+  # dpkg -x $DEB $BUILD_DIR/.apt/
+# done
 
 #install_oracle_libraries 
