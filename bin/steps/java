@@ -22,7 +22,7 @@ install_jdk_jdbc(){
   wget --no-proxy "$jdk_download_url"
   echo "Downloaded [$jdk_download_url]"
   echo "Rename to tar.gz"
-  mv jdk-8u131-linux-x64.jar jdk-8u131-linux-x64.tar.gz
+  mv jdk-8u131-linux-x64-jdk-8u131-linux-x64.jar jdk-8u131-linux-x64.tar.gz
   echo "unzipping libraries"
   tar -xvzf jdk-8u131-linux-x64.tar.gz
   
