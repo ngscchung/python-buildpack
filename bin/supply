@@ -103,9 +103,6 @@ source $BIN_DIR/steps/pylibmc
 
 # Automatic configuration for Gunicorn's ForwardedAllowIPS setting.
 echo "export FORWARDED_ALLOW_IPS='*'" > $DEPS_DIR/$DEPS_IDX/profile.d/python.gunicorn.sh
-echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:$DEPS_DIR/$DEPS_IDX/oracle/instantclient'" > $DEPS_DIR/$DEPS_IDX/profile.d/test_add_LD_LIB.sh
-
-
 
 set_default_profile_d PYTHONHASHSEED random
 echo random > $DEPS_DIR/$DEPS_IDX/env/PYTHONHASHSEED
