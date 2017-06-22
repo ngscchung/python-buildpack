@@ -81,7 +81,7 @@ source $BIN_DIR/steps/hooks/pre_compile
 source $BIN_DIR/steps/java
 
 # Test apt-get install
-# source $BIN_DIR/steps/apt
+source $BIN_DIR/steps/apt
 
 # Pipenv Python version support.
 $BIN_DIR/steps/pipenv-python-version.rb $BUILD_DIR
