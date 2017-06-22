@@ -6,7 +6,7 @@ echo "=====> Prepare to download JDK"
 # fail fast
 set -e
 
-install_jdk(){
+install_jdk_jdbc(){
   echo $HOME
   echo $BUILD_DIR
   
@@ -17,15 +17,34 @@ install_jdk(){
   
   cd $java_home
   
-  local jdk_download_url="http://10.222.58.152:8080/jdk-8u131-linux-x64.tar.gz"
+  # local jdk_download_url="http://10.222.58.152:8080/jdk-8u131-linux-x64.tar.gz"
+  local jdk_download_url="http://artifact:8081/artifactory/thirdparty_tools/thirdparty_lib/jdk-8u131-linux-x64/jdk-8u131-linux-x64/jdk-8u131-linux-x64-jdk-8u131-linux-x64.jar"
   wget --no-proxy "$jdk_download_url"
   echo "Downloaded [$jdk_download_url]"
+  echo "Rename to tar.gz"
+  mv jdk-8u131-linux-x64.jar jdk-8u131-linux-x64.tar.gz
   echo "unzipping libraries"
-  
   tar -xvzf jdk-8u131-linux-x64.tar.gz
   
   rm jdk-8u131-linux-x64.tar.gz
+  
+  append_profile_d JVM_HOME "\$DEPS_DIR/$DEPS_IDX/java/jdk1.8.0_131/jre/lib/amd64/server/libjvm.so"
+  echo $DEPS_DIR/$DEPS_IDX/java/jdk1.8.0_131/jre/lib/amd64/server/libjvm.so > $DEPS_DIR/$DEPS_IDX/env/JVM_HOME
+  
+  echo "_+_+_+_+_+_Downloading jdbc"
+  local jdbc_home=$DEPS_DIR/$DEPS_IDX/jdbc
+  mkdir -p $jdbc_home
+  
+  cd $jdbc_home
+  local jdbc_download_url="http://artifact:8081/artifactory/thirdparty_tools/thirdparty_lib/ojdbc6/6/ojdbc6-6.jar"
+  wget --no-proxy "$jdbc_download_url"
+  echo "Downloaded [$jdbc_download_url]"
+  
+  append_profile_d JDBC_HOME "\$DEPS_DIR/$DEPS_IDX/jdbc/ojdbc6-6.jar"
+  echo $DEPS_DIR/$DEPS_IDX/jdbc/ojdbc6-6.jar > $DEPS_DIR/$DEPS_IDX/env/JDBC_HOME
+  
+  
 
 }
 
-install_jdk
+install_jdk_jdbc
