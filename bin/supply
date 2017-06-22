@@ -78,10 +78,13 @@ echo "=*=*=*=*=* Check pre_compile hook"
 source $BIN_DIR/steps/hooks/pre_compile
 
 # Install JDK for Jpype and JayDeBeSi ==> for OracleDB access
-source $BIN_DIR/steps/java
+# source $BIN_DIR/steps/java
 
 # Test apt-get install
 source $BIN_DIR/steps/apt
+
+# Test oracle instant client install
+source $BIN_DIR/steps/oracleclient
 
 # Pipenv Python version support.
 $BIN_DIR/steps/pipenv-python-version.rb $BUILD_DIR
