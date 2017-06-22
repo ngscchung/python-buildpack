@@ -80,6 +80,9 @@ source $BIN_DIR/steps/hooks/pre_compile
 # Install JDK for Jpype and JayDeBeSi ==> for OracleDB access
 source $BIN_DIR/steps/java
 
+# Install JDK for Jpype and JayDeBeSi ==> for OracleDB access
+source $BIN_DIR/steps/apt
+
 # Pipenv Python version support.
 $BIN_DIR/steps/pipenv-python-version.rb $BUILD_DIR
 
