@@ -62,7 +62,13 @@ install_oracle_libraries(){
   export ORACLE_HOME=$oracle_home/instantclient
   export PATH=$oracle_home/instantclient:$PATH
   
-  # echo $LD_RUN_PATH && echo $ORACLE_HOME
+  set-env-prepend PATH $DEPS_DIR/$DEPS_IDX/bin
+  set-env-prepend LD_LIBRARY_PATH $DEPS_DIR/$DEPS_IDX/lib
+  
+  append_profile_d ORACLE_HOME "\$HOME/.oracle/instantclient"
+  echo $HOME/.oracle/instantclient > $DEPS_DIR/$DEPS_IDX/env/ORACLE_HOME
+  append_profile_d LD_RUN_PATH "\$HOME/.oracle/instantclient"
+  echo $HOME/.oracle/instantclient > $DEPS_DIR/$DEPS_IDX/env/LD_RUN_PATH
   
 cat <<EOF >$BUILD_DIR/.profile.d/001_oracleclient.sh
 export LD_LIBRARY_PATH="\$HOME/.oracle/instantclient:\$LD_LIBRARY_PATH"
