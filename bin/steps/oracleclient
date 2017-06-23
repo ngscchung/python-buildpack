@@ -56,17 +56,13 @@ install_oracle_libraries(){
   ln -s libclntsh.so.11.1 libclntsh.so
   ln -s libocci.so.11.1 libocci.so
   
-  # set env variable here no use? need to add .sh in .profile.d
-  export LD_RUN_PATH=$oracle_home/instantclient
-  export LD_LIBRARY_PATH=$oracle_home/instantclient:$LD_LIBRARY_PATH
-  export ORACLE_HOME=$oracle_home/instantclient
-  export PATH=$oracle_home/instantclient:$PATH
-  
-  append_profile_d ORACLE_HOME "\$DEPS_DIR/$DEPS_IDX/oracle/instantclient"
+  # prepare env variables for pip install use
+  # append_profile_d ORACLE_HOME "\$DEPS_DIR/$DEPS_IDX/oracle/instantclient"
   echo $DEPS_DIR/$DEPS_IDX/oracle/instantclient > $DEPS_DIR/$DEPS_IDX/env/ORACLE_HOME
-  append_profile_d LD_RUN_PATH "\$DEPS_DIR/$DEPS_IDX/oracle/instantclient"
+  # append_profile_d LD_RUN_PATH "\$DEPS_DIR/$DEPS_IDX/oracle/instantclient"
   echo $DEPS_DIR/$DEPS_IDX/oracle/instantclient > $DEPS_DIR/$DEPS_IDX/env/LD_RUN_PATH
   
+  # prepare env variables for python runtime use
 cat <<EOF >$BUILD_DIR/.profile.d/001_oracleclient.sh
 export LD_LIBRARY_PATH="\$DEPS_DIR/$DEPS_IDX/oracle/instantclient:\$LD_LIBRARY_PATH"
 export LD_RUN_PATH="\$DEPS_DIR/$DEPS_IDX/oracle/instantclient:\$LD_RUN_PATH"
