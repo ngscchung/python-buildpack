@@ -77,6 +77,7 @@ export CPPPATH="\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/i386-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/pkgconfig\${PKG_CONFIG_PATH:+:}\${PKG_CONFIG_PATH}"
 EOF
 
+# TODO: non-existing env variable like LD_LIBRARY_PATH, INCLUDE_PATH and PKG_CONFIG_PATH caused shellscript error... should add "check exist"
 export PATH="$BUILD_DIR/.apt/usr/bin:$PATH"
 export LD_LIBRARY_PATH="$BUILD_DIR/.apt/lib/x86_64-linux-gnu/:$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$LD_LIBRARY_PATH"
 # export LIBRARY_PATH="$BUILD_DIR/.apt/lib/x86_64-linux-gnu/:$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$LIBRARY_PATH"
