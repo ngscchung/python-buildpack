@@ -2,7 +2,6 @@ source $BIN_DIR/utils
 echo '-=-=-=-=-=-=-= start Python Installation!!'
 PYTHON_VERSION=''
 pwd
-ls $BUILD_PATH
 
 if [ -f runtime.txt ]; then
   PYTHON_VERSION=$(cat runtime.txt)

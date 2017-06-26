@@ -70,7 +70,8 @@ export LD_RUN_PATH="\$DEPS_DIR/$DEPS_IDX/oracle/instantclient:\$LD_RUN_PATH"
 export ORACLE_HOME="\$DEPS_DIR/$DEPS_IDX/oracle/instantclient:\$ORACLE_HOME"
 export PATH="\$DEPS_DIR/$DEPS_IDX/oracle/instantclient:\$PATH"
 EOF
-   
+  echo "Back to $BUILD_DIR.."
+  cd $BUILD_DIR 
 }
 
 install_oracle_libraries 
