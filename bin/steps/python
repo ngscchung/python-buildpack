@@ -1,6 +1,9 @@
 source $BIN_DIR/utils
-
+echo '-=-=-=-=-=-=-= start Python Installation!!'
 PYTHON_VERSION=''
+ls runtime.txt
+cat runtime.txt
+
 if [ -f runtime.txt ]; then
   PYTHON_VERSION=$(cat runtime.txt)
 fi
