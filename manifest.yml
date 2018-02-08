@@ -15,6 +15,10 @@ default_versions:
   version: 1.0.18
 - name: libffi
   version: 3.2.1
+- name: oracleclientbasic
+  version: 11.2.0.4.0
+- name: oracleclientsdk
+  version: 11.2.0.4.0
 dependency_deprecation_dates:
 - match: 2.7.\d+
   version_line: "2.7"
@@ -138,6 +142,18 @@ dependencies:
   - cflinuxfs2
   uri: https://buildpacks.cloudfoundry.org/dependencies/python/python-3.6.1-linux-x64-d8e1dbc6.tgz
   md5: d8e1dbc67436d294890536c99dcda0f0
+- name: oracleclientbasic
+  version: 11.2.0.4.0
+  cf_stacks:
+  - cflinuxfs2
+  uri: http://artifact:8081/artifactory/thirdparty_tools/thirdparty_lib/instantclient-basic-linux.x64-11.2.0.4.0/instantclient-basic-linux.x64-11.2.0.4.0/instantclient-basic-linux.x64-11.2.0.4.0-instantclient-basic-linux.x64-11.2.0.4.0.jar
+  md5: b310d32b23e346f30bdadb0370a5e4e0
+- name: oracleclientsdk
+  version: 11.2.0.4.0
+  cf_stacks:
+  - cflinuxfs2
+  uri: http://artifact:8081/artifactory/thirdparty_tools/thirdparty_lib/instantclient-sdk-linux.x64-11.2.0.4.0/instantclient-sdk-linux.x64-11.2.0.4.0/instantclient-sdk-linux.x64-11.2.0.4.0-instantclient-sdk-linux.x64-11.2.0.4.0.jar
+  md5: 92c841b1ae6478247e5e466fd72cc9ac  
 exclude_files:
 - ".git/"
 - ".gitignore"
