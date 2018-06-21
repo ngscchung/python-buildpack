@@ -71,6 +71,7 @@ install_oracle_libraries(){
   
   # prepare env variables for python runtime use
   # Shell scripts in .profile.d folder are triggered at the start of cf start app
+  mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/001_oracleclient.sh
 export LD_LIBRARY_PATH="\$DEPS_DIR/$DEPS_IDX/oracle/instantclient:\$LD_LIBRARY_PATH"
 export LD_RUN_PATH="\$DEPS_DIR/$DEPS_IDX/oracle/instantclient:\$LD_RUN_PATH"

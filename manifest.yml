@@ -19,6 +19,8 @@ default_versions:
   version: 11.2.0.4.0
 - name: oracleclientsdk
   version: 11.2.0.4.0
+- name: oraclejdk
+  version: 1.8.0.131
 dependency_deprecation_dates:
 - match: 2.7.\d+
   version_line: "2.7"
@@ -146,14 +148,20 @@ dependencies:
   version: 11.2.0.4.0
   cf_stacks:
   - cflinuxfs2
-  uri: http://artifact:8081/artifactory/thirdparty_tools/thirdparty_lib/instantclient-basic-linux.x64-11.2.0.4.0/instantclient-basic-linux.x64-11.2.0.4.0/instantclient-basic-linux.x64-11.2.0.4.0-instantclient-basic-linux.x64-11.2.0.4.0.jar
+  uri: http://hkgcvpd00111:8081/artifactory/thirdparty_tools-remote/thirdparty_lib/instantclient-basic-linux.x64-11.2.0.4.0/instantclient-basic-linux.x64-11.2.0.4.0/instantclient-basic-linux.x64-11.2.0.4.0-instantclient-basic-linux.x64-11.2.0.4.0.jar
   md5: b310d32b23e346f30bdadb0370a5e4e0
 - name: oracleclientsdk
   version: 11.2.0.4.0
   cf_stacks:
   - cflinuxfs2
-  uri: http://artifact:8081/artifactory/thirdparty_tools/thirdparty_lib/instantclient-sdk-linux.x64-11.2.0.4.0/instantclient-sdk-linux.x64-11.2.0.4.0/instantclient-sdk-linux.x64-11.2.0.4.0-instantclient-sdk-linux.x64-11.2.0.4.0.jar
+  uri: http://hkgcvpd00111:8081/artifactory/thirdparty_tools-remote/thirdparty_lib/instantclient-sdk-linux.x64-11.2.0.4.0/instantclient-sdk-linux.x64-11.2.0.4.0/instantclient-sdk-linux.x64-11.2.0.4.0-instantclient-sdk-linux.x64-11.2.0.4.0.jar
   md5: 92c841b1ae6478247e5e466fd72cc9ac  
+- name: oraclejdk
+  version: 1.8.0.131
+  cf_stacks:
+  - cflinuxfs2
+  uri: http://hkgcvpd00111:8081/artifactory/thirdparty_tools-remote/thirdparty_lib/jdk-8u131-linux-x64/jdk-8u131-linux-x64/jdk-8u131-linux-x64-jdk-8u131-linux-x64.jar
+  md5: 75b2cb2249710d822a60f83e28860053  
 exclude_files:
 - ".git/"
 - ".gitignore"

@@ -16,12 +16,6 @@ export CACHE_DIR=$2
 export DEPS_DIR=$3
 export DEPS_IDX=$4
 
-if [ ! -f "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh" ]; then
-    echo "----------------- Set DEPS_DIR for new PCF -----------------"
-    mkdir -p "$BUILD_DIR/.profile.d"
-    echo "export DEPS_DIR=/home/vcap/deps" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
-fi
-
 source $BUILDPACK_PATH/compile-extensions/lib/common
 source $BIN_DIR/utils
 
@@ -84,7 +78,7 @@ echo "=*=*=*=*=* Check pre_compile hook"
 source $BIN_DIR/steps/hooks/pre_compile
 
 # Install JDK for Jpype and JayDeBeSi ==> for OracleDB access
-source $BIN_DIR/steps/java
+# source $BIN_DIR/steps/java
 
 # Test apt-get install
 source $BIN_DIR/steps/apt
