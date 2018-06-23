@@ -1,5 +1,5 @@
 # Install dependencies with Pip.
-puts-cmd "pip install -r requirements.txt"
+puts-cmd "pip install --timeout 60 -r requirements.txt"
 
 if [ -f $CACHE_DIR/egg-path-prefix ]; then
   prefix=$(cat $CACHE_DIR/egg-path-prefix)
@@ -16,11 +16,11 @@ if [ -f $CACHE_DIR/egg-path-prefix ]; then
 fi
 
 if test -d $BUILD_DIR/vendor; then
-  pip install -r requirements.txt --exists-action=w --src=$DEPS_DIR/$DEPS_IDX/src --no-index --find-links=file://$BUILD_DIR/vendor | cleanup | indent
+  pip install --timeout 60 -r requirements.txt --exists-action=w --src=$DEPS_DIR/$DEPS_IDX/src --no-index --find-links=file://$BUILD_DIR/vendor | cleanup | indent
   cp requirements.txt $DEPS_DIR/$DEPS_IDX/python/requirements-declared.txt
   pip freeze --find-links=file://$BUILD_DIR/vendor --disable-pip-version-check > $DEPS_DIR/$DEPS_IDX/python/requirements-installed.txt
 else
-  pip install -r requirements.txt --exists-action=w --src=$DEPS_DIR/$DEPS_IDX/src | cleanup | indent
+  pip install --timeout 60 -r requirements.txt --exists-action=w --src=$DEPS_DIR/$DEPS_IDX/src | cleanup | indent
 
   cp requirements.txt $DEPS_DIR/$DEPS_IDX/python/requirements-declared.txt
   pip freeze > $DEPS_DIR/$DEPS_IDX/python/requirements-installed.txt
